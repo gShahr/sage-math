@@ -4,24 +4,28 @@
 from sage.all_cmdline import *   # import sage library
 
 _sage_const_2 = Integer(2); _sage_const_1 = Integer(1); _sage_const_3 = Integer(3); _sage_const_4 = Integer(4)
-def knuth_first_relation(perm):
-    n = len(perm)
+def knuth_first_relation(perm1, perm2):
+    n = len(perm1)
     for i in range(n - _sage_const_2 ):
-        if perm[i] < perm[i + _sage_const_2 ] < perm[i + _sage_const_1 ]:
-            new_perm = perm[:i] + (perm[i + _sage_const_1 ], perm[i], perm[i + _sage_const_2 ]) + perm[i + _sage_const_3 :]
-            yield new_perm
+        if perm1[i] < perm1[i + _sage_const_2 ] < perm1[i + _sage_const_1 ]:
+            new_perm = perm1[:i] + (perm1[i + _sage_const_1 ], perm1[i], perm1[i + _sage_const_2 ]) + perm1[i + _sage_const_3 :]
+            if new_perm == perm2:
+                return True
+    return False
 
-def knuth_second_relation(perm):
-    n = len(perm)
+def knuth_second_relation(perm1, perm2):
+    n = len(perm1)
     for i in range(n - _sage_const_2 ):
-        if perm[i + _sage_const_1 ] < perm[i] < perm[i + _sage_const_2 ]:
-            new_perm = perm[:i] + (perm[i + _sage_const_1 ], perm[i], perm[i + _sage_const_2 ]) + perm[i + _sage_const_3 :]
-            yield new_perm
+        if perm1[i + _sage_const_1 ] < perm1[i] < perm1[i + _sage_const_2 ]:
+            new_perm = perm1[:i] + (perm1[i + _sage_const_1 ], perm1[i], perm1[i + _sage_const_2 ]) + perm1[i + _sage_const_3 :]
+            if new_perm == perm2:
+                return True
+    return False
 
-def apply_knuth_relations(perm):
-    first_relations = list(knuth_first_relation(perm))
-    second_relations = list(knuth_second_relation(perm))
-    both_relations = first_relations + second_relations
+def apply_knuth_relations(perm1, perm2):
+    first_relations = knuth_first_relation(perm1, perm2)
+    second_relations = knuth_second_relation(perm1, perm2)
+    both_relations = first_relations and second_relations
     return first_relations, second_relations, both_relations
 
 def insertion_tableau(perm):
@@ -30,14 +34,15 @@ def insertion_tableau(perm):
 perms = list(Permutations(_sage_const_4 ))
 
 equivalence_classes = {}
-for perm in perms:
-    first_relations, second_relations, both_relations = apply_knuth_relations(perm)
-    equivalence_classes[perm] = {
-        'first': first_relations,
-        'second': second_relations,
-        'both': both_relations,
-        'P-tableau': insertion_tableau(perm)
-    }
+for perm1 in perms:
+    for perm2 in perms:
+        first_relations, second_relations, both_relations = apply_knuth_relations(perm1, perm2)
+        equivalence_classes[perm1] = {
+            'first': first_relations,
+            'second': second_relations,
+            'both': both_relations,
+            'P-tableau': insertion_tableau(perm1)
+        }
 
 for perm, relations in equivalence_classes.items():
     print(f"Permutation: {perm}")
