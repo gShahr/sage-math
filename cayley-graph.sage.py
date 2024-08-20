@@ -18,6 +18,14 @@ CGU.show()
 plot = CGU.plot(edge_labels=True)
 plot.save('q8-cayley-graph.png')
 
+G = SymmetricGroup(_sage_const_4 )
+generators = [G((_sage_const_1 ,_sage_const_2 )), G((_sage_const_2 ,_sage_const_3 )), G((_sage_const_3 ,_sage_const_4 ))]
+CG = G.cayley_graph(generators=generators)
+CGU = CG.to_undirected()
+plot = CGU.plot(edge_labels=True)
+plot.save('s4-cayley-graph.png')
+plot.show()
+
 # Define the Knuth relations
 def knuth_first_relation(perm):
     n = len(perm)
@@ -43,4 +51,21 @@ second_relation_results = list(knuth_second_relation(perm))
 print(f"Original permutation: {perm}")
 print(f"First relation results: {first_relation_results}")
 print(f"Second relation results: {second_relation_results}")
+
+def generate_permutohedron(n):
+    perms = list(Permutations(n))
+    G = Graph()
+    for perm in perms:
+        G.add_vertex(perm)
+    for i in range(len(perms)):
+        for j in range(i + _sage_const_1 , len(perms)):
+            diff_positions = [k for k in range(n) if perms[i][k] != perms[j][k]]
+            if len(diff_positions) == _sage_const_2  and abs(diff_positions[_sage_const_0 ] - diff_positions[_sage_const_1 ]) == _sage_const_1 :
+                G.add_edge(perms[i], perms[j])
+    return G
+
+permutohedron = generate_permutohedron(_sage_const_4 )
+plot = permutohedron.plot(edge_colors=True, vertex_labels=True)
+plot.show()
+plot.save('permutohedron_order_4.png')
 
