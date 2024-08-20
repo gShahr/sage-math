@@ -1,23 +1,28 @@
-G=SymmetricGroup(3)
+import os
+
+# Ensure the img directory exists
+os.makedirs('img', exist_ok=True)
+
+G = SymmetricGroup(3)
 CG = G.cayley_graph(generators=[G((1,2)),G((2,3))])
 CGU = CG.to_directed()
 CGU.show()
 plot = CGU.plot(edge_labels=True)
-plot.save('s3-cayley-graph.png')
+plot.save('img/s3-cayley-graph.png')
 
 Q8 = QuaternionGroup()
 CG = Q8.cayley_graph(generators=[Q8.gen(0), Q8.gen(1)])
 CGU = CG.to_directed()
 CGU.show()
 plot = CGU.plot(edge_labels=True)
-plot.save('q8-cayley-graph.png')
+plot.save('img/q8-cayley-graph.png')
 
 G = SymmetricGroup(4)
 generators = [G((1,2)), G((2,3)), G((3,4))]
 CG = G.cayley_graph(generators=generators)
 CGU = CG.to_undirected()
 plot = CGU.plot(edge_labels=True)
-plot.save('s4-cayley-graph.png')
+plot.save('img/s4-cayley-graph.png')
 plot.show()
 
 # Define the Knuth relations
@@ -61,4 +66,4 @@ def generate_permutohedron(n):
 permutohedron = generate_permutohedron(4)
 plot = permutohedron.plot(edge_colors=True, vertex_labels=True)
 plot.show()
-plot.save('permutohedron_order_4.png')
+plot.save('img/permutohedron_order_4.png')
