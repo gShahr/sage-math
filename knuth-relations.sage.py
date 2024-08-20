@@ -8,7 +8,7 @@ def knuth_first_relation(perm1, perm2):
     n = len(perm1)
     for i in range(n - _sage_const_2 ):
         if perm1[i] < perm1[i + _sage_const_2 ] < perm1[i + _sage_const_1 ]:
-            new_perm = perm1[:i] + (perm1[i + _sage_const_1 ], perm1[i], perm1[i + _sage_const_2 ]) + perm1[i + _sage_const_3 :]
+            new_perm = perm1[:i] + [perm1[i + _sage_const_1 ], perm1[i], perm1[i + _sage_const_2 ]] + perm1[i + _sage_const_3 :]
             if new_perm == perm2:
                 return True
     return False
@@ -17,7 +17,7 @@ def knuth_second_relation(perm1, perm2):
     n = len(perm1)
     for i in range(n - _sage_const_2 ):
         if perm1[i + _sage_const_1 ] < perm1[i] < perm1[i + _sage_const_2 ]:
-            new_perm = perm1[:i] + (perm1[i + _sage_const_1 ], perm1[i], perm1[i + _sage_const_2 ]) + perm1[i + _sage_const_3 :]
+            new_perm = perm1[:i] + [perm1[i + _sage_const_1 ], perm1[i], perm1[i + _sage_const_2 ]] + perm1[i + _sage_const_3 :]
             if new_perm == perm2:
                 return True
     return False
@@ -37,18 +37,19 @@ equivalence_classes = {}
 for perm1 in perms:
     for perm2 in perms:
         first_relations, second_relations, both_relations = apply_knuth_relations(perm1, perm2)
-        equivalence_classes[perm1] = {
+        equivalence_classes[(perm1, perm2)] = {
             'first': first_relations,
             'second': second_relations,
-            'both': both_relations,
-            'P-tableau': insertion_tableau(perm1)
+            'both': both_relations
+            #'P-tableau': insertion_tableau(perm1)
         }
 
-for perm, relations in equivalence_classes.items():
-    print(f"Permutation: {perm}")
+for (perm1, perm2), relations in equivalence_classes.items():
+    print(f"Permutation 1: {perm1}")
+    print(f"Permutation 2: {perm2}")
     print(f"  First relations: {relations['first']}")
     print(f"  Second relations: {relations['second']}")
     print(f"  Both relations: {relations['both']}")
-    print(f"  P-tableau: {relations['P-tableau']}")
+    #print(f"  P-tableau: {relations['P-tableau']}")
     print()
 
