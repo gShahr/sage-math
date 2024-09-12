@@ -25,7 +25,7 @@ def apply_knuth_relations(perm1, perm2):
 def insertion_tableau(perm):
     return Tableau(perm).to_schur()
 
-perms = list(Permutations(4))
+perms = list(Permutations(3))
 
 equivalence_classes = {}
 for perm1 in perms:
@@ -38,11 +38,23 @@ for perm1 in perms:
             #'P-tableau': insertion_tableau(perm1)
         }
 
+G = Graph()
 for (perm1, perm2), relations in equivalence_classes.items():
-    print(f"Permutation 1: {perm1}")
-    print(f"Permutation 2: {perm2}")
-    print(f"  First relations: {relations['first']}")
-    print(f"  Second relations: {relations['second']}")
-    print(f"  Both relations: {relations['both']}")
-    #print(f"  P-tableau: {relations['P-tableau']}")
-    print()
+    # print(f"Permutation 1: {perm1}")
+    # print(f"Permutation 2: {perm2}")
+    # print(f"  First relations: {relations['first']}")
+    # print(f"  Second relations: {relations['second']}")
+    # print(f"  Both relations: {relations['both']}")
+    # print(f"  P-tableau: {relations['P-tableau']}")
+    # print()
+    G.add_vertex(perm1)
+    G.add_vertex(perm2)
+    if relations['first']:
+        G.add_edge(perm1, perm2, label='first')
+    if relations['second']:
+        G.add_edge(perm1, perm2, label='second')
+    if relations['both']:
+        G.add_edge(perm1, perm2, label='both')
+
+plot = G.plot(edge_labels=True)
+plot.save("equivalence_class_graph.png")
