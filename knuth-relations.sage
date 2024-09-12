@@ -1,8 +1,8 @@
 def knuth_first_relation(perm1, perm2):
     n = len(perm1)
     for i in range(n - 2):
-        if perm1[i] < perm1[i + 2] < perm1[i + 1]:
-            new_perm = perm1[:i] + [perm1[i + 1], perm1[i], perm1[i + 2]] + perm1[i + 3:]
+        if perm1[i+1] < perm1[i] < perm1[i+2]:
+            new_perm = perm1[:i] + [perm1[i], perm1[i+2], perm1[i+1]] + perm1[i+3:]
             if new_perm == perm2:
                 return True
     return False
@@ -10,8 +10,8 @@ def knuth_first_relation(perm1, perm2):
 def knuth_second_relation(perm1, perm2):
     n = len(perm1)
     for i in range(n - 2):
-        if perm1[i + 1] < perm1[i] < perm1[i + 2]:
-            new_perm = perm1[:i] + [perm1[i + 1], perm1[i], perm1[i + 2]] + perm1[i + 3:]
+        if perm1[i] < perm1[i+2] < perm1[i+1]:
+            new_perm = perm1[:i] + [perm1[i+1], perm1[i], perm1[i+2]] + perm1[i+3:]
             if new_perm == perm2:
                 return True
     return False
