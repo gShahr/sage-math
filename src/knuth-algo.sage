@@ -47,7 +47,7 @@ def generate_knuth_moves_bfs(permutation):
     return adjacency_graph
 
 def plot_knuth_moves_graph(adjacency_graph):
-    G = nx.DiGraph()
+    G = nx.Graph()
     
     # Add nodes and edges to the graph
     for current_permutation, neighbors in adjacency_graph.items():
