@@ -13,7 +13,8 @@ def generate_knuth_moves_bfs(permutation):
         
         # Apply both Knuth moves (K1 and K2)
         for i in range(len(current_permutation) - 3):
-            if current_permutation[i + 1] < current_permutation[i] < current_permutation[i + 2] and current_permutation[i + 1] < current_permutation[i + 3] < current_permutation[i + 2]:
+            if (current_permutation[i + 1] < current_permutation[i] < current_permutation[i + 2] and current_permutation[i + 1] < current_permutation[i + 3] < current_permutation[i + 2]) or \
+            (current_permutation[i + 2] < current_permutation[i] < current_permutation[i + 1] and current_permutation[i + 2] < current_permutation[i + 3] < current_permutation[i + 1]):
                 new_permutation = current_permutation[:]
                 new_permutation[i + 1], new_permutation[i + 2] = new_permutation[i + 2], new_permutation[i + 1]
                 if tuple(new_permutation) not in visited:
@@ -23,7 +24,8 @@ def generate_knuth_moves_bfs(permutation):
         
         # Apply first Knuth move (K1)
         for i in range(len(current_permutation) - 2):
-            if current_permutation[i + 1] < current_permutation[i] < current_permutation[i + 2]:
+            if current_permutation[i + 1] < current_permutation[i] < current_permutation[i + 2] or \
+            current_permutation[i + 2] < current_permutation[i] < current_permutation[i + 1]:
                 new_permutation = current_permutation[:]
                 new_permutation[i + 1], new_permutation[i + 2] = new_permutation[i + 2], new_permutation[i + 1]
                 if tuple(new_permutation) not in visited:
@@ -33,7 +35,8 @@ def generate_knuth_moves_bfs(permutation):
         
         # Apply second Knuth move (K2)
         for i in range(len(current_permutation) - 2):
-            if current_permutation[i] < current_permutation[i + 2] < current_permutation[i + 1]:
+            if (current_permutation[i] < current_permutation[i + 2] < current_permutation[i + 1]) or \
+            (current_permutation[i + 1] < current_permutation[i + 2] < current_permutation[i]):
                 new_permutation = current_permutation[:]
                 new_permutation[i], new_permutation[i + 1] = new_permutation[i + 1], new_permutation[i]
                 if tuple(new_permutation) not in visited:
@@ -62,7 +65,7 @@ def plot_knuth_moves_graph(adjacency_graph):
     plt.show()
 
 # Example usage
-permutation = [2, 1, 4, 3]
+permutation = [2, 1, 4, 3, 5]
 adjacency_graph = generate_knuth_moves_bfs(permutation)
 print("Original permutation:", permutation)
 print("Adjacency graph:", adjacency_graph)
