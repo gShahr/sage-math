@@ -64,6 +64,26 @@ def plot_knuth_moves_graph(adjacency_graph):
     plt.title("Knuth Moves Graph")
     plt.show()
 
+def generate_permutations_by_shape(shape):
+    """
+    Generates a list of all permutations given a tableau shape.
+    Each tableau is a valid standard tableau where:
+      - Rows are increasing from left to right.
+      - Columns are increasing from top to bottom.
+    The function returns a list of permutations, each being a concatenation of rows.
+    
+    :param shape: A tuple representing the shape of the tableau (e.g., (3, 3)).
+    :return: A list of permutations corresponding to the tableaux.
+    """
+    permutations = []
+    tableaux_list = StandardTableaux(shape)
+    for tableau in tableaux_list:
+        permutation = []
+        for row in tableau:
+            permutation.extend(row)
+        permutations.append(permutation)
+    return permutations
+
 # Example usage
 permutation = [2, 1, 4, 3, 5]
 adjacency_graph = generate_knuth_moves_bfs(permutation)
