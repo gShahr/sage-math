@@ -84,11 +84,11 @@ def generate_permutations_by_shape(shape):
         permutations.append(permutation)
     return permutations
 
-# Example usage
-permutation = [2, 1, 4, 3, 5]
-adjacency_graph = generate_knuth_moves_bfs(permutation)
-print("Original permutation:", permutation)
-print("Adjacency graph:", adjacency_graph)
-
-# Plot the graph
-plot_knuth_moves_graph(adjacency_graph)
+# permutation = [2, 1, 4, 3, 5]
+shape = (3, 3)
+permutations = generate_permutations_by_shape(shape)
+for permutation in permutations:
+    adjacency_graph = generate_knuth_moves_bfs(permutation)
+    print("Original permutation:", permutation)
+    print("Adjacency graph:", adjacency_graph)
+    plot_knuth_moves_graph(adjacency_graph)
