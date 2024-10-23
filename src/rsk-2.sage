@@ -27,6 +27,6 @@ P = Tableau([[1, 2, 5], [3, 6], [4, 7]])
 gp_S5 = RSK_inverse(P, P)
 print("Inverse RSK (S5):", gp_S5)
 
-P = Tableau([[1, 2, 4], [3], [5]])
+P = Tableau([[1, 2, 3], [4], [5]])
 gp_S5 = RSK_inverse(P, P)
 print("Inverse RSK (S5):", gp_S5)
