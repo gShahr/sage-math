@@ -46,7 +46,7 @@ def generate_knuth_moves_bfs(permutation):
     
     return adjacency_graph
 
-def plot_knuth_moves_graph(adjacency_graph):
+def plot_knuth_moves_graph(adjacency_graph, filename):
     G = nx.Graph()
     
     # Add nodes and edges to the graph
@@ -62,7 +62,8 @@ def plot_knuth_moves_graph(adjacency_graph):
     nx.draw_networkx_edge_labels(G, pos, edge_labels=labels)
     
     plt.title("Knuth Moves Graph")
-    plt.show()
+    plt.savefig(filename)
+    plt.close()
 
 def generate_permutations_by_shape(shape):
     """
@@ -91,4 +92,5 @@ for permutation in permutations:
     adjacency_graph = generate_knuth_moves_bfs(permutation)
     print("Original permutation:", permutation)
     print("Adjacency graph:", adjacency_graph)
-    plot_knuth_moves_graph(adjacency_graph)
+    file_name = ''.join(map(str, permutation)) + ".png"
+    plot_knuth_moves_graph(adjacency_graph, file_name)
