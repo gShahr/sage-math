@@ -110,5 +110,6 @@ for permutation in permutations:
     adjacency_graph = generate_knuth_moves_bfs(permutation)
     print("Original permutation:", permutation)
     print("Adjacency graph:", adjacency_graph)
-    file_name = ''.join(map(str, permutation)) + ".png"
+    reversed_elements = sum(P.to_list()[::-1], [])
+    file_name = ''.join(map(str, reversed_elements)) + ".png"
     plot_knuth_moves_graph(adjacency_graph, file_name)
