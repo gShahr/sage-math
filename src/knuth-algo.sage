@@ -85,10 +85,28 @@ def generate_permutations_by_shape(shape):
         permutations.append(permutation)
     return permutations
 
+def convert_permutation_to_tableau(permutation, shape):
+    """
+    Converts a permutation into a tableau with the given shape.
+    
+    :param permutation: The permutation to convert.
+    :param shape: The shape of the tableau.
+    :return: The tableau with the given shape.
+    """
+    tableau = []
+    index = 0
+    for row_length in shape:
+        tableau.append(permutation[index:index + row_length])
+        index += row_length
+    return Tableau(tableau)
+
 # permutation = [2, 1, 4, 3, 5]
-shape = (3, 3)
+shape = (3, 1)
 permutations = generate_permutations_by_shape(shape)
 for permutation in permutations:
+    P = convert_permutation_to_tableau(permutation, shape)
+    gp_S5 = RSK_inverse(P, P)
+    print("Inverse RSK (S5):", gp_S5)
     adjacency_graph = generate_knuth_moves_bfs(permutation)
     print("Original permutation:", permutation)
     print("Adjacency graph:", adjacency_graph)
