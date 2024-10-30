@@ -101,13 +101,13 @@ def convert_permutation_to_tableau(permutation, shape):
     return Tableau(tableau)
 
 # permutation = [2, 1, 4, 3, 5]
-shape = (4, 2)
+shape = (3, 1)
 permutations = generate_permutations_by_shape(shape)
 for permutation in permutations:
     P = convert_permutation_to_tableau(permutation, shape)
     gp_S5 = RSK_inverse(P, P)
     print("Inverse RSK (S5):", gp_S5)
-    adjacency_graph = generate_knuth_moves_bfs(permutation)
+    adjacency_graph = generate_knuth_moves_bfs(gp_S5[1])
     print("Original permutation:", permutation)
     print("Adjacency graph:", adjacency_graph)
     reversed_elements = sum(P.to_list()[::-1], [])
