@@ -101,7 +101,7 @@ def convert_permutation_to_tableau(permutation, shape):
     return Tableau(tableau)
 
 # permutation = [2, 1, 4, 3, 5]
-shape = (3, 1, 1)
+shape = (4, 1)
 permutations = generate_permutations_by_shape(shape)
 for permutation in permutations:
     P = convert_permutation_to_tableau(permutation, shape)
