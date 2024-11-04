@@ -100,6 +100,9 @@ def convert_permutation_to_tableau(permutation, shape):
         index += row_length
     return Tableau(tableau)
 
+def get_permutations_from_adjacency_graph(adjacency_graph):
+    return list(adjacency_graph.keys())
+
 # permutation = [2, 1, 4, 3, 5]
 shape = (4, 1)
 permutations = generate_permutations_by_shape(shape)
