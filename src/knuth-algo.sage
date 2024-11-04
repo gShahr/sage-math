@@ -58,6 +58,9 @@ def plot_knuth_moves_graph(adjacency_graph, filename):
     
     pos = nx.spring_layout(G)
     labels = nx.get_edge_attributes(G, 'label')
+    width = 12
+    height = 8
+    plt.figure(figsize=(width, height))
     nx.draw(G, pos, with_labels=True, node_size=3000, node_color='lightblue', font_size=10, font_weight='bold')
     nx.draw_networkx_edge_labels(G, pos, edge_labels=labels)
     
@@ -104,7 +107,7 @@ def get_permutations_from_adjacency_graph(adjacency_graph):
     return list(adjacency_graph.keys())
 
 # permutation = [2, 1, 4, 3, 5]
-shape = (4, 1)
+shape = (4, 1, 1)
 permutations = generate_permutations_by_shape(shape)
 for permutation in permutations:
     P = convert_permutation_to_tableau(permutation, shape)
