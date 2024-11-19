@@ -3,6 +3,12 @@ import matplotlib.pyplot as plt
 from collections import deque, defaultdict
 
 def generate_knuth_moves_bfs(permutation):
+    """
+    Generates a graph of permutations using Breadth-First Search (BFS) with Knuth moves.
+
+    :param permutation: A list representing the initial permutation.
+    :return: A defaultdict representing the adjacency graph of permutations.
+    """
     adjacency_graph = defaultdict(list)
     queue = deque([(permutation, "start")])
     visited = set()
@@ -47,6 +53,12 @@ def generate_knuth_moves_bfs(permutation):
     return adjacency_graph
 
 def plot_knuth_moves_graph(adjacency_graph, filename):
+    """
+    Plots the graph of permutations and saves it to a file.
+
+    :param adjacency_graph: A defaultdict representing the adjacency graph of permutations.
+    :param filename: The name of the file to save the plot.
+    """
     G = nx.Graph()
     
     # Add nodes and edges to the graph
@@ -71,12 +83,8 @@ def plot_knuth_moves_graph(adjacency_graph, filename):
 def generate_permutations_by_shape(shape):
     """
     Generates a list of all permutations given a tableau shape.
-    Each tableau is a valid standard tableau where:
-      - Rows are increasing from left to right.
-      - Columns are increasing from top to bottom.
-    The function returns a list of permutations, each being a concatenation of rows.
-    
-    :param shape: A tuple representing the shape of the tableau (e.g., (3, 3)).
+
+    :param shape: A tuple representing the shape of the tableau (e.g., (4, 3)).
     :return: A list of permutations corresponding to the tableaux.
     """
     permutations = []
@@ -91,7 +99,7 @@ def generate_permutations_by_shape(shape):
 def convert_permutation_to_tableau(permutation, shape):
     """
     Converts a permutation into a tableau with the given shape.
-    
+
     :param permutation: The permutation to convert.
     :param shape: The shape of the tableau.
     :return: The tableau with the given shape.
@@ -104,6 +112,12 @@ def convert_permutation_to_tableau(permutation, shape):
     return Tableau(tableau)
 
 def get_permutations_from_adjacency_graph(adjacency_graph):
+    """
+    Retrieves the list of permutations from the adjacency graph.
+
+    :param adjacency_graph: A defaultdict representing the adjacency graph of permutations.
+    :return: A list of permutations.
+    """
     return list(adjacency_graph.keys())
 
 # permutation = [2, 1, 4, 3, 5]
