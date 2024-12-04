@@ -7,6 +7,7 @@ This repository contains my projects and code related to Sage Math.
 - [Introduction](#introduction)
 - [Installation](#installation)
 - [Usage](#usage)
+- [Knuth Moves Graph](#knuth-moves-graph)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -21,6 +22,16 @@ To use the code in this repository, you need to have Sage Math installed on your
 ## Usage
 
 Once you have Sage Math installed, you can clone this repository and explore the projects and code available. Each project is contained in its own directory and comes with its own README file explaining how to use it.
+
+## Knuth Moves Graph
+
+This section of the code generates and plots a graph of permutations using Knuth moves based on the shape of the tableau the user passes in. The main functions are:
+
+- `generate_knuth_moves_bfs(permutation)`: Generates a graph of permutations using Breadth-First Search (BFS) with Knuth moves.
+- `plot_knuth_moves_graph(adjacency_graph, filename)`: Plots the graph of permutations and saves it to a file.
+- `generate_permutations_by_shape(shape)`: Generates a list of all permutations given a tableau shape.
+- `convert_permutation_to_tableau(permutation, shape)`: Converts a permutation into a tableau with the given shape.
+- `get_permutations_from_adjacency_graph(adjacency_graph)`: Retrieves the list of permutations from the adjacency graph.
 
 ## Contributing
 
