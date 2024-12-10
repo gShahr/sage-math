@@ -120,16 +120,13 @@ def get_permutations_from_adjacency_graph(adjacency_graph):
     """
     return list(adjacency_graph.keys())
 
-# permutation = [2, 1, 4, 3, 5]
-shape = (4, 1, 1)
+shape = (2, 2)
 permutations = generate_permutations_by_shape(shape)
 for permutation in permutations:
     P = convert_permutation_to_tableau(permutation, shape)
-    gp_S5 = RSK_inverse(P, P)
-    print("Inverse RSK (S5):", gp_S5)
-    adjacency_graph = generate_knuth_moves_bfs(gp_S5[1])
-    print("Original permutation:", permutation)
-    print("Adjacency graph:", adjacency_graph)
+    inverse = RSK_inverse(P, P)
+    print(permutation, P, inverse)
+    adjacency_graph = generate_knuth_moves_bfs(inverse[1])
     reversed_elements = sum(P.to_list()[::-1], [])
     file_name = ''.join(map(str, reversed_elements)) + ".png"
     plot_knuth_moves_graph(adjacency_graph, file_name)
